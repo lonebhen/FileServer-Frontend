@@ -1,0 +1,119 @@
+
+<nav class="navbar navbar-dark bg-primary">
+  
+</nav>
+
+
+
+
+
+
+<main class="">
+      
+      <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+          <div class="row gx-lg-5 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+              <h1 class="my-5 display-3 fw-bold ls-tight">
+                The best place <br />
+                <span class="text-primary">for your files</span>
+              </h1>
+              <p style="color: hsl(217, 10%, 50.8%)">
+                  Looking for a place where you can get files to download for free. Look no futher.
+              </p>
+            </div>
+    
+            <div class="col-lg-6 mb-5 mb-lg-0">
+              <div class="card">
+                <div class="card-body py-5 px-md-5">
+                  <div class="text-center">
+                    <fa-icon [icon]="faSignIn" class="fa-3x"></fa-icon>
+                </div>
+                  <form [formGroup] = "loginForm" (ngSubmit)="login()">
+    
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <input type="email" id="form3Example3" class="form-control" formControlName = "email"/>
+                      <label class="form-label" for="form3Example3">Email address</label>
+  
+                      <div  *ngIf="email.errors?.['required']">
+                          <div *ngIf="email.touched && email.invalid" class="alert alert-danger"> Email is required</div>
+                          
+                      </div>
+  
+                      <div  *ngIf="email.errors?.['pattern']">
+                          <div *ngIf="email.touched && email.invalid" class="alert alert-danger"> Wrong email pattern</div>
+                          
+                      </div>
+                    </div>
+    
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <input type="password" id="form3Example4" class="form-control" formControlName = "password"/>
+                      <label class="form-label" for="form3Example4">Password</label>
+  
+                      <div  *ngIf="password.errors?.['required']">
+                          <div *ngIf="password.touched && password.invalid" class="alert alert-danger"> Password is required</div>
+                          
+                      </div>
+  
+                      <div  *ngIf="password.errors?.['minlength']">
+                          <div *ngIf="password.touched && password.invalid" class="alert alert-danger"> Password should be atleas 8</div>
+                          
+                      </div>
+                    </div>
+  
+  
+                    <div class="col">
+                      <a routerLink="../forgot-password">Forgot password?</a>
+                    </div>
+  
+                    <br>
+                    <br>
+    
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]= "loginForm.invalid">
+                      Sign in
+                    </button>
+    
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                      <a routerLink="../signup">Sign up with us</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Jumbotron -->
+</main>
+  
+  
+   <footer>
+       
+      <div class="text-center text-white" style="background-color: #0a4275;">
+        <div class="container p-4 pb-0">
+          <section class="">
+            <p class="d-flex justify-content-center align-items-center">
+              <span class="me-3">FILE SERVER</span>
+              <button type="button" class="btn btn-outline-light btn-rounded" routerLink="../signup">
+                Sign up!
+              </button>
+            </p>
+          </section>
+        </div>
+
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2023 Copyright:
+          <a class="text-white" href="https://twitter.com/lonebhen">Benjamin</a>
+        </div>
+      </div>
+    
+   </footer>
+  
+  
+  
+      
+  
