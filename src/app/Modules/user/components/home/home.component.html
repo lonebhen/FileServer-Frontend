@@ -1,0 +1,93 @@
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <section class="d-flex input-group w-auto">
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+          [(ngModel)]="term"
+        />
+        <span class="input-group-text text-dark border-0" id="search-addon">
+          <fa-icon [icon]="faSearch" class="fas fa-search"></fa-icon>
+        </span>
+      </section>
+      <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+  
+  <main>
+    <div class="container pt-5 pb-5">
+      <div class="col-12">
+        <div class="d-flex flex-wrap justify-content-evenly">
+          <div class="card shadow mt-2" *ngFor="let file of feed | filter: term ">
+            <div class="card-body">
+              <h5 class="card-title">{{ file.name }}</h5>
+              <p class="card-text">{{ file.description }}</p>
+              <ng-container [ngSwitch]="getFileType(file.file)">
+                <ng-container *ngSwitchCase="'jpg'">
+                  <img [src]="file.file" alt="Image">
+                </ng-container>
+                <ng-container *ngSwitchCase="'png'">
+                  <img [src]="file.file" alt="Image">
+                </ng-container>
+                <ng-container *ngSwitchCase="'gif'">
+                  <img [src]="file.file" alt="Image">
+                </ng-container>
+                <ng-container *ngSwitchCase="'jpeg'">
+                  <img [src]="file.file" alt="Image">
+                </ng-container>
+                <ng-container *ngSwitchCase="'jfif'">
+                  <img [src]="file.file" alt="Image">
+                </ng-container>
+                <ng-container *ngSwitchCase="'mp3'">
+                  <audio controls>
+                    <source [src]="file.file" type="audio/mpeg">
+                    Browser does not support audio playback.
+                  </audio>
+                </ng-container>
+                <ng-container *ngSwitchCase="'wav'">
+                  <audio controls>
+                    <source [src]="file.file" type="audio/wav">
+                    Browser does not support audio playback.
+                  </audio>
+                </ng-container>
+                <ng-container *ngSwitchCase="'ogg'">
+                  <audio controls>
+                    <source [src]="file.file" type="audio/ogg">
+                    Browser does not support audio playback.
+                  </audio>
+                </ng-container>
+                <ng-container *ngSwitchCase="'mp4'">
+                  <video controls width="420" height="240">
+                    <source [src]="file.file" type="video/mp4">
+                  </video>
+                </ng-container>
+                <ng-container *ngSwitchCase="'webm'">
+                  <video controls width="320" height="240">
+                    <source [src]="file.file" type="video/webm">
+                  </video>
+                </ng-container>
+                <ng-container *ngSwitchCase="'ogg'">
+                  <video controls width="320" height="240">
+                    <source [src]="file.file" type="video/ogg">
+                  </video>
+                </ng-container>
+                <a *ngSwitchCase="'pdf'" [href]="file.file" target="_blank">View PDF</a>
+              </ng-container>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <button class="btn btn-primary" (click)="openEmailForm(file.id)">Send to mail</button>
+                <a class="btn btn-primary" [href]="file.file" download>Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <app-footer></app-footer>
+  </footer>
+  
