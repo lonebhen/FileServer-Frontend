@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxExtendedPdfViewerCommonModule } from 'ngx-extended-pdf-viewer/lib/ngx-extended-pdf-viewer-common.module';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer/public_api';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -47,13 +49,12 @@ import { FileActivityService } from './Services/file-activity.service';
     MatSnackBarModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    NgxSpinnerModule,
     // NgxExtendedPdfViewerModule
     
     
-   
-
-    
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [AuthService, FeedService, FileActivityService],
   bootstrap: [AppComponent]
 })

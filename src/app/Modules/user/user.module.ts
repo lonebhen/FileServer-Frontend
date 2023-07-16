@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
@@ -11,6 +11,8 @@ import { CustomFilterPipe } from 'src/app/Pipes/custom-filter-pipe.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailFormComponent } from './components/email-form/email-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
 // import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 
@@ -33,10 +35,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    NgxSpinnerModule,
     
     
     
   ],
-  providers: [FeedService]
+  providers: [FeedService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class UserModule { }

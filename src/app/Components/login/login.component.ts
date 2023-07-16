@@ -4,6 +4,7 @@ import { FormBuilder,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarAction } from '@angular/material/snack-bar';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit{
   emailRegex: string = "[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
 
 
-  constructor( private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar){
+  constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar){
     this.loginForm = fb.group({
       email: fb.control('', [Validators.required, Validators.pattern(this.emailRegex)]),
       password: fb.control('', [Validators.required, Validators.minLength(8)])
@@ -53,11 +54,14 @@ export class LoginComponent implements OnInit{
     return this.loginForm.get('password')
   }
 
-
   login(){
 
     const email = this.email.value
     const password = this.password.value
+
+    this.spinner.show()
+
+    
 
     this.authService.login(email,  password).subscribe(
       response => {
@@ -67,6 +71,7 @@ export class LoginComponent implements OnInit{
         this.router.navigateByUrl('/user').then(() => {
 
           setTimeout(()=>{
+            this.spinner.hide();
             alert("Welcome!!")
           }, 200)
         
@@ -77,6 +82,8 @@ export class LoginComponent implements OnInit{
       },
 
       error => {
+
+        this.spinner.hide();
 
         this.router.navigateByUrl('/login').then(()=>
         

@@ -3,6 +3,7 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,7 +16,7 @@ export class ForgotPasswordComponent {
 
   resetForm: any;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router){
+  constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private authService: AuthService, private router: Router){
     this.resetForm = fb.group({
       username: fb.control('',[Validators.required]),
       new_password: fb.control('',[Validators.required, Validators.minLength(8)])
@@ -35,9 +36,13 @@ export class ForgotPasswordComponent {
     const username = this.username.value
     const new_password = this.new_password.value
 
+    this.spinner.show();
+
 
     this.authService.reset(username, new_password).subscribe(
       response => {
+
+        this.spinner.hide();
 
         this.router.navigate(['login']).then(
           () => {
@@ -49,8 +54,9 @@ export class ForgotPasswordComponent {
         
       },
       error=>{
+        this.spinner.hide();
 
-        alert("Username does not exits")
+        alert("Username does not exit")
 
       }
       

@@ -6,6 +6,7 @@ import { MatDialog} from '@angular/material/dialog';
 import { EmailFormComponent } from '../email-form/email-form.component';
 import { AuthService } from 'src/app/Services/auth.service';
 import { FileActivityService } from 'src/app/Services/file-activity.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -20,14 +21,18 @@ export class HomeComponent implements OnInit{
 
   term: string;
 
-  constructor( private feedService: FeedService, private dialog: MatDialog, private authService: AuthService,
+  constructor( private spinner: NgxSpinnerService, private feedService: FeedService, private dialog: MatDialog, private authService: AuthService,
     private fileactivity: FileActivityService){  }
 
   ngOnInit(): void {
 
+    this.spinner.show(); 
+
     this.feedService.getFiles().subscribe(
       (data) => {
         this.feed = data["data"];
+
+        this.spinner.hide(); 
         
       }
     )

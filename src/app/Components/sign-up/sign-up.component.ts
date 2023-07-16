@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/Services/auth.service';
 import { MatSnackBar, } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SignUpComponent {
   emailRegex: string = "[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, private router: Router){
+  constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, private router: Router){
 
     this.signupForm = fb.group({
       username: fb.control('',[Validators.required]),
@@ -51,12 +52,15 @@ export class SignUpComponent {
     const email = this.email.value
     const password = this.password.value
 
+    this.spinner.show()
+
 
     this.authService.signup(username, email, password).subscribe(
 
       (response) => {
 
-        console.log(response);
+
+        this.spinner.hide()
 
         this.router.navigateByUrl('/login').then(
           () => {
@@ -70,6 +74,7 @@ export class SignUpComponent {
 
       },
       (error) => {
+        this.spinner.hide();
         alert("Credentials already exits")
       }
       
