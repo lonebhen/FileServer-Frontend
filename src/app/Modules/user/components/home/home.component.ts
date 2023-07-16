@@ -68,9 +68,9 @@ export class HomeComponent implements OnInit{
           const email = result.email;
           const file_id = result["fileId"]
 
-          console.log(file_id);
+          // console.log(file_id);
 
-          console.log(email);
+          // console.log(email);
           
 
           this.fileactivity.sendFileToEmail(file_id, email).subscribe(
