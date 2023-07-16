@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FileActivityService {
 
-  private api_url: string = "https://file-server-ben.onrender.com/files";
+  private api_url: string = "https://file-server-ben.onrender.com/server/files";
 
   constructor(private http: HttpClient) { }
 
