@@ -29,7 +29,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-// function m(value: typeof import("c:/Users/Benjamin/Desktop/100/server/src/app/Modules/user/user.module")): typeof import("c:/Users/Benjamin/Desktop/100/server/src/app/Modules/user/user.module") | PromiseLike<typeof import("c:/Users/Benjamin/Desktop/100/server/src/app/Modules/user/user.module")> {
-//   throw new Error('Function not implemented.');
-// }
 

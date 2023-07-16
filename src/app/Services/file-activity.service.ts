@@ -14,7 +14,6 @@ export class FileActivityService {
   sendFileToEmail(file_id: number, email: string): Observable<any>{
 
     const token = localStorage.getItem('token')
-    // const payload = {file_id: file_id, email: email}
 
     const headers = new HttpHeaders(
 

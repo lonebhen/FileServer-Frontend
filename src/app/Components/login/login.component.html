@@ -4,10 +4,6 @@
 </nav>
 
 
-
-
-
-
 <main class="">
       
       <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
@@ -31,7 +27,6 @@
                 </div>
                   <form [formGroup] = "loginForm" (ngSubmit)="login()">
     
-                    <!-- Email input -->
                     <div class="form-outline mb-4">
                       <input type="email" id="form3Example3" class="form-control" formControlName = "email"/>
                       <label class="form-label" for="form3Example3">Email address</label>
@@ -47,7 +42,6 @@
                       </div>
                     </div>
     
-                    <!-- Password input -->
                     <div class="form-outline mb-4">
                       <input type="password" id="form3Example4" class="form-control" formControlName = "password"/>
                       <label class="form-label" for="form3Example4">Password</label>
@@ -71,12 +65,10 @@
                     <br>
                     <br>
     
-                    <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]= "loginForm.invalid">
                       Sign in
                     </button>
     
-                    <!-- Register buttons -->
                     <div class="text-center">
                       <a routerLink="../signup">Sign up with us</a>
                     </div>
@@ -87,7 +79,6 @@
           </div>
         </div>
       </div>
-      <!-- Jumbotron -->
 </main>
   
   

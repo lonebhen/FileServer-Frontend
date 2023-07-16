@@ -28,8 +28,6 @@ export class HomeComponent implements OnInit{
     this.feedService.getFiles().subscribe(
       (data) => {
         this.feed = data["data"];
-
-        console.log(this.feed);
         
       }
     )
@@ -68,14 +66,12 @@ export class HomeComponent implements OnInit{
           const email = result.email;
           const file_id = result["fileId"]
 
-          // console.log(file_id);
-
-          // console.log(email);
-          
 
           this.fileactivity.sendFileToEmail(file_id, email).subscribe(
             (response) => {
-              console.log("Worked?");
+              setTimeout(()=>{
+                alert("File Sent to email")
+              }, 500)
               
             }
           )

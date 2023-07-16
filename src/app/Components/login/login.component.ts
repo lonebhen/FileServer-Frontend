@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit{
     return this.loginForm.get('password')
   }
 
- 
 
   login(){
 
@@ -87,17 +86,12 @@ export class LoginComponent implements OnInit{
           }, 30)
         }
         
-        )
-
-
-        
+        )      
 
       }
      
     )
 
   }
-
-
 
 }
