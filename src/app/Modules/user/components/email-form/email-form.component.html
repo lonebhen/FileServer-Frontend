@@ -1,22 +1,27 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">Email Form</h4>
+      <h4 class="modal-title padding">Email to receive file</h4>
+      <br>
       <button type="button" class="close" (click)="onClose()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="emailForm" (ngSubmit)="onSubmit()" class="padding" >
         <div class="form-group">
           <label for="email">Email Address:</label>
+          <br>
           <input type="email" id="email" class="form-control" formControlName="email">
           <div *ngIf="emailForm.get('email').errors?.['required']" class="text-danger">Email is required</div>
           <div *ngIf="emailForm.get('email').errors?.['email']" class="text-danger">Invalid email address</div>
         </div>
+        <br>
+        <br>
         <div class="form-group text-right">
           <button type="submit" class="btn btn-primary" [disabled]="!emailForm.valid">Submit</button>
         </div>
+        <br>
       </form>
     </div>
   </div>

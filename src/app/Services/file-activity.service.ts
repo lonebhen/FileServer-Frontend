@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FileActivityService {
 
-  private api_url: string = "http://localhost:8000/files";
+  private api_url: string = "https://file-server-ben.onrender.com/files";
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +22,22 @@ export class FileActivityService {
        'Authorization': `Token ${token}`}
     );
 
-    return this.http.post(`${this.api_url}/${file_id}/${email}/email/`, {headers})
+    return this.http.post(`${this.api_url}/${file_id}/${email}/email/`,{}, {headers})
+  }
+
+  downloadFile(file_id: number): Observable<any>{
+
+    const token = localStorage.getItem('token')
+
+    const headers = new HttpHeaders(
+
+      { 'Content-Type': 'application/json',
+       'Authorization': `Token ${token}`}
+    );
+
+
+    return this.http.post(`${this.api_url}/${file_id}/download/`, {}, {headers})
+
+
   }
 }

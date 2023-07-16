@@ -5,6 +5,7 @@ import { NgModel } from '@angular/forms';
 import { MatDialog} from '@angular/material/dialog';
 import { EmailFormComponent } from '../email-form/email-form.component';
 import { AuthService } from 'src/app/Services/auth.service';
+import { FileActivityService } from 'src/app/Services/file-activity.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit{
 
   term: string;
 
-  constructor( private feedService: FeedService, private dialog: MatDialog, private authService: AuthService){  }
+  constructor( private feedService: FeedService, private dialog: MatDialog, private authService: AuthService,
+    private fileactivity: FileActivityService){  }
 
   ngOnInit(): void {
 
@@ -64,8 +66,20 @@ export class HomeComponent implements OnInit{
       result => {
         if(result && result.email){
           const email = result.email;
+          const file_id = result["fileId"]
 
-          console.log(result);
+          console.log(file_id);
+
+          console.log(email);
+          
+
+          this.fileactivity.sendFileToEmail(file_id, email).subscribe(
+            (response) => {
+              console.log("Worked?");
+              
+            }
+          )
+
           
         }
       }
@@ -77,6 +91,17 @@ export class HomeComponent implements OnInit{
     this.authService.logout()
 
 
+  }
+
+
+  openDownload(file_id){
+
+    this.fileactivity.downloadFile(file_id).subscribe(
+      (response) =>{
+        console.log("Downloaded");
+        
+      }
+    )
   }
 
 
