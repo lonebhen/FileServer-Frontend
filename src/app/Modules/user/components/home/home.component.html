@@ -78,7 +78,7 @@
               </ng-container>
               <div class="d-flex justify-content-between align-items-center mt-3">
                 <button class="btn btn-primary" (click)="openEmailForm(file.id)">Send to mail</button>
-                <a class="btn btn-primary" [href]="file.file" download>Download</a>
+                <a class="btn btn-primary" [href]="file.file" download (click)="openDownload(file.id) ">Download</a>
               </div>
             </div>
           </div>
