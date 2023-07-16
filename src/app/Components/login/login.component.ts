@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit{
 
           setTimeout(()=>{
             alert("Welcome!!")
-          }, 50)
+          }, 200)
         
       },
       
