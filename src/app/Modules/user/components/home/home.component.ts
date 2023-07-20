@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit{
         this.feed = data["data"];
 
         this.spinner.hide(); 
+
+        
         
       }
     )
@@ -40,10 +42,15 @@ export class HomeComponent implements OnInit{
   }
 
   getFileType(fileUrl: string): string {
-    const startIndex = fileUrl.lastIndexOf('.');
-    const endIndex = fileUrl.indexOf('?');
-    const extension = fileUrl.substring(startIndex + 1, endIndex);
-    return extension;
+    if (typeof fileUrl === 'string') {
+      const startIndex = fileUrl.lastIndexOf('.');
+      const endIndex = fileUrl.indexOf('?');
+      const extension = fileUrl.substring(startIndex + 1, endIndex);
+      return extension;
+    } else {
+      // Return a default extension or handle the error condition as needed
+      return 'unknown';
+    }
   }
 
 
@@ -95,23 +102,38 @@ export class HomeComponent implements OnInit{
   }
 
 
-  openDownload(file_id){
-
-    this.fileactivity.downloadFile(file_id).subscribe(
-      (response) =>{
-        console.log("Downloaded");
+  openDownload(file_id, file_type): void {
+    this.spinner.show();
+  
+    this.feedService.downloadFile(file_id).subscribe(
+      (response) => {
         
+        
+        this.spinner.hide();
+
+        const fileExtension = this.getFileType(response);
+  
+        const blob = new Blob([response], { type: 'application/octet-stream' });
+  
+        const url = window.URL.createObjectURL(blob);
+  
+        // Create an anchor element to trigger the download
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = `file_${file_id}.${file_type}`; 
+        document.body.appendChild(anchor);
+  
+        anchor.click();
+  
+        document.body.removeChild(anchor);
+        window.URL.revokeObjectURL(url);
+      },
+      (error) => {
+        this.spinner.hide();
+        console.error('Error downloading file:', error);
       }
-    )
+    );
   }
-
-
-
-  
-    
-  
-
-
   
 
   

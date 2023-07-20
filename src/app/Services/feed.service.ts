@@ -28,4 +28,14 @@ export class FeedService {
 
 
   }
+
+  downloadFile(fileId: number): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.get(`${this.api_url}/files/${fileId}/download/`, { headers, responseType: 'blob' });
+  }
 }
