@@ -54,7 +54,7 @@ export class ForgotPasswordComponent {
       error=>{
         this.spinner.hide();
 
-        alert("Username does not exit")
+        alert("Email does not exit")
 
       }
       
