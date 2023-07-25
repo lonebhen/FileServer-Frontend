@@ -8,7 +8,11 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  // private api_url: string = "https://file-server-ben.onrender.com/auth"
+
   private api_url: string = "https://file-server-ben.onrender.com/auth"
+
+  private password_reset_api_url: string = "https://file-server-ben.onrender.com/api/password_reset"
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -41,26 +45,21 @@ export class AuthService {
     
   }
 
-  signup(username: string, email: string, password:string): Observable<any>{
-    const signUpData = {username: username, email: email, password: password}
+  signup( email: string, password1:string, password2): Observable<any>{
+    const signUpData = {email: email, password1: password1, password2: password2}
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(`${this.api_url}/signup/`, signUpData, { headers })
   }
 
 
-  reset(username: string, new_password:string):Observable<any>{
-    const resetData = {username: username, new_password: new_password}
+  reset(email: string):Observable<any>{
+    const resetData = {email: email}
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.post(`${this.api_url}/pass-reset/`, resetData, {headers} )
+    return this.http.post(`${this.password_reset_api_url}/`, resetData, {headers} )
    }
 
    
-
-
-   
-
-
    
 }

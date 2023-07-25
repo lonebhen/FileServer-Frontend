@@ -9,6 +9,8 @@ export class FileActivityService {
 
   private api_url: string = "https://file-server-ben.onrender.com/server/files";
 
+  // private api_url: string = "http://localhost:8000/server/files"
+
   constructor(private http: HttpClient) { }
 
   sendFileToEmail(file_id: number, email: string): Observable<any>{

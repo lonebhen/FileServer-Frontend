@@ -66,8 +66,11 @@ export class LoginComponent implements OnInit{
     this.authService.login(email,  password).subscribe(
       response => {
 
+        console.log(response);
+        
 
-        this.authService.setToken(response["token"])
+
+        this.authService.setToken(response["key"])
         this.router.navigateByUrl('/user').then(() => {
 
           setTimeout(()=>{

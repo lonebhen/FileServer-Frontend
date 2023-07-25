@@ -14,32 +14,30 @@ export class ForgotPasswordComponent {
 
   faLock = faLock;
 
+  emailRegex: string = "[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+
   resetForm: any;
 
   constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private authService: AuthService, private router: Router){
     this.resetForm = fb.group({
-      username: fb.control('',[Validators.required]),
-      new_password: fb.control('',[Validators.required, Validators.minLength(8)])
+      email: fb.control('', [Validators.required, Validators.pattern(this.emailRegex)]),
     })
   }
 
-  get username(){
-    return this.resetForm.get("username")
+  get email(){
+    return this.resetForm.get("email")
   }
 
-  get new_password(){
-    return this.resetForm.get("new_password")
-  }
+
 
 
   resetPassword(){
-    const username = this.username.value
-    const new_password = this.new_password.value
+    const email = this.email.value
 
     this.spinner.show();
 
 
-    this.authService.reset(username, new_password).subscribe(
+    this.authService.reset(email).subscribe(
       response => {
 
         this.spinner.hide();
@@ -47,7 +45,7 @@ export class ForgotPasswordComponent {
         this.router.navigate(['login']).then(
           () => {
             setTimeout(()=>{
-              alert("Password reset! Login now")
+              alert("Check your mail to begin your password reset")
             }, 100)
           }
         )

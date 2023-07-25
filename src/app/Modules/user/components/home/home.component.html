@@ -1,26 +1,23 @@
 <nav class="navbar navbar-dark bg-primary">
-    <div class="container-fluid">
-      <section class="d-flex input-group w-auto">
-        <input
-          type="search"
-          class="form-control rounded"
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="search-addon"
-          [(ngModel)]="term"
-        />
-        <span class="input-group-text text-dark border-0" id="search-addon">
-          <fa-icon [icon]="faSearch" class="fas fa-search"></fa-icon>
-        </span>
-      </section>
-      <button class="btn btn-outline-light" (click)="logout()">Logout</button>
-    </div>
-  </nav>
+  <div class="container-fluid">
+    <section class="d-flex input-group w-auto">
+      <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        [(ngModel)]="term"
+      />
+      <span class="input-group-text text-dark border-0" id="search-addon">
+        <fa-icon [icon]="faSearch" class="fas fa-search"></fa-icon>
+      </span>
+    </section>
+    <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+  </div>
+</nav>
 
-  <body>
-    
-  
-  
+<body>
   <main>
     <div class="container pt-5 pb-5">
       <div class="col-12">
@@ -90,12 +87,17 @@
       </div>
     </div>
   </main>
-
 </body>
-  
-  <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 
-  <footer>
-    <app-footer></app-footer>
-  </footer>
-  
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<footer>
+  <app-footer></app-footer>
+</footer>
+
+
+<ng-template #noFilesFound>
+  <div class="text-center py-5">
+    <h4>No files found</h4>
+  </div>
+</ng-template>

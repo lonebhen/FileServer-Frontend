@@ -1,85 +1,106 @@
 import { Component } from '@angular/core';
-import { faKey, faMessage, faEnvelope, faUser,  } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, Validators } from '@angular/forms';
+import { faKey, faMessage, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/Services/auth.service';
-import { MatSnackBar, } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent {
 
+export class SignUpComponent {
   faKey = faKey;
   faMessage = faMessage;
   faEnvelope = faEnvelope;
-  faUser = faUser
+  faUser = faUser;
 
-  signupForm: any;
-  emailRegex: string = "[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+  signupForm: FormGroup;
+  emailRegex: string = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
 
-
-  constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar, private router: Router){
-
+  constructor(
+    private spinner: NgxSpinnerService,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {
     this.signupForm = fb.group({
-      username: fb.control('',[Validators.required]),
-      email: fb.control('',[Validators.required, Validators.pattern(this.emailRegex)]),
-      password: fb.control('',[Validators.required, Validators.minLength(8)])
-    })
-
+      email: ['', [Validators.required, Validators.pattern(this.emailRegex)]],
+      password1: ['', [Validators.required, Validators.minLength(8), this.passwordComplexityValidator()]],
+      password2: ['', Validators.required]
+    }, { validator: this.passwordMatchValidator });
   }
 
-  get username(){
-    return this.signupForm.get("username");
-  }
 
-  get email(){
+  get email() {
     return this.signupForm.get("email");
   }
 
-  get password(){
-    return this.signupForm.get("password")
+  get password1() {
+    return this.signupForm.get("password1");
   }
 
+  get password2() {
+    return this.signupForm.get("password2");
+  }
 
-  signup(){
+  passwordMatchValidator(control: AbstractControl) {
+    const password1 = control.get('password1')?.value;
+    const password2 = control.get('password2')?.value;
 
-    const username = this.username.value
-    const email = this.email.value
-    const password = this.password.value
+    if (password1 !== password2) {
+      control.get('password2')?.setErrors({ passwordMismatch: true });
+    } else {
+      control.get('password2')?.setErrors(null);
+    }
 
-    this.spinner.show()
+    return null;
+  }
 
+  passwordComplexityValidator() {
+    return (control: AbstractControl) => {
+      const password = control.value;
+      const hasNumber = /\d/.test(password);
+      const hasUpper = /[A-Z]/.test(password);
+      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-    this.authService.signup(username, email, password).subscribe(
+      if (!hasNumber || !hasUpper || !hasSpecial) {
+        return { passwordComplexity: true };
+      }
 
+      return null;
+    };
+  }
+
+  showVerificationAlert() {
+    alert("Sign up successful! Please check your email to verify your registration before you can log in.");
+  }
+  
+
+  signup() {
+    const email = this.email.value;
+    const password1 = this.password1.value;
+    const password2 = this.password2.value
+
+    this.spinner.show();
+
+    this.authService.signup(email, password1, password2).subscribe(
       (response) => {
-
-
-        this.spinner.hide()
-
-        this.router.navigateByUrl('/login').then(
-          () => {
-            setTimeout(()=>{
-              alert("Sign up successful, Login");
-            },100)
-          }
-        )
-        
-
-
+        this.spinner.hide();
+        this.router.navigateByUrl('/signup').then(() => {
+          setTimeout(() => {
+            this.showVerificationAlert();
+          }, 100);
+        });
       },
       (error) => {
         this.spinner.hide();
-        alert("Credentials already exits")
+        alert("Credentials already exist");
       }
-      
     )
-
-
   }
 }

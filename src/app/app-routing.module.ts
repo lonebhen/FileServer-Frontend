@@ -5,6 +5,8 @@ import { ForgotPasswordComponent } from './Components/forgot-password/forgot-pas
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { AuthGuard } from './Guards/auth.guard';
+import { WelcomeComponent } from './Components/welcome/welcome.component';
+import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
 
 const routes: Routes = [
   
@@ -12,6 +14,8 @@ const routes: Routes = [
     { path: "login", component: LoginComponent},
     { path: "signup", component: SignUpComponent},
     { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'welcome', component: WelcomeComponent},
+    { path: 'reset-password', component: PasswordResetComponent },
     {
       path: "user",
       canActivate: [AuthGuard],

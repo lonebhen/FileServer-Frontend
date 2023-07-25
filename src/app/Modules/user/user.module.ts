@@ -13,7 +13,9 @@ import { EmailFormComponent } from './components/email-form/email-form.component
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
-// import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+
 
 
 
@@ -26,6 +28,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HomeComponent,
     CustomFilterPipe,
     EmailFormComponent,
+    // FormsModule
     
   ],
   imports: [
@@ -36,11 +39,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     MatDialogModule,
     NgxSpinnerModule,
+    NgxExtendedPdfViewerModule,
     
     
     
   ],
-  providers: [FeedService],
+  providers: [FeedService, CustomFilterPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class UserModule { }

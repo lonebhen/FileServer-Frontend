@@ -1,85 +1,102 @@
 <section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-12 col-xl-11">
-          <div class="card text-black" style="border-radius: 25px;">
-            <div class="card-body p-md-5">
-              <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-  
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-  
-                  <form class="mx-1 mx-md-4" [formGroup]="signupForm" (ngSubmit)="signup()">
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <fa-icon [icon]="faUser" class="fa-lg me-3 fa-fw " ></fa-icon>
-                      <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control" formControlName="username" />
-                        <label class="form-label" for="form3Example1c">Username</label>
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                        <div  *ngIf="username.errors?.['required']">
-                            <div *ngIf="username.touched && username.invalid" class="alert alert-danger"> Username is required</div>
-                            
-                        </div>
-    
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form class="mx-1 mx-md-4" [formGroup]="signupForm" (ngSubmit)="signup()">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <fa-icon [icon]="faEnvelope" class="fa-lg me-3 fa-fw " ></fa-icon>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="form3Example3c" class="form-control" formControlName="email"/>
+                      <label class="form-label" for="form3Example3c">Your Email</label>
+
+                      <div  *ngIf="email.errors?.['required']">
+                          <div *ngIf="email.touched && email.invalid" class="alert alert-danger"> Email is required</div>
+                          
+                      </div>
+  
+                      <div  *ngIf="email.errors?.['pattern']">
+                          <div *ngIf="email.touched && email.invalid" class="alert alert-danger"> Wrong email pattern</div>
+                          
                       </div>
                     </div>
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <fa-icon [icon]="faEnvelope" class="fa-lg me-3 fa-fw " ></fa-icon>
-                      <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="form3Example3c" class="form-control" formControlName="email"/>
-                        <label class="form-label" for="form3Example3c">Your Email</label>
+                  </div>
 
-                        <div  *ngIf="email.errors?.['required']">
-                            <div *ngIf="email.touched && email.invalid" class="alert alert-danger"> Email is required</div>
-                            
-                        </div>
-    
-                        <div  *ngIf="email.errors?.['pattern']">
-                            <div *ngIf="email.touched && email.invalid" class="alert alert-danger"> Wrong email pattern</div>
-                            
-                        </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <fa-icon [icon]="faKey" class="fa-lg me-3 fa-fw fas " ></fa-icon>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" class="form-control" formControlName="password1"/>
+                      <label class="form-label" for="form3Example4c">Password</label>
+                  
+                      <div *ngIf="password1.errors?.['required']">
+                        <div *ngIf="password1.touched && password1.invalid" class="alert alert-danger"> Password is required</div>
                       </div>
-                    </div>
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <fa-icon [icon]="faKey" class="fa-lg me-3 fa-fw fas " ></fa-icon>
-                      <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4c" class="form-control" formControlName="password"/>
-                        <label class="form-label" for="form3Example4c">Password</label>
-
-                        <div  *ngIf="password.errors?.['required']">
-                            <div *ngIf="password.touched && password.invalid" class="alert alert-danger"> Password is required</div>
-                            
-                        </div>
-    
-                        <div  *ngIf="password.errors?.['minlength']">
-                            <div *ngIf="password.touched && password.invalid" class="alert alert-danger"> Password should be atleast 8 characters</div>
-                            
+                  
+                      <div *ngIf="password1.errors?.['minlength']">
+                        <div *ngIf="password1.touched && password1.invalid" class="alert alert-danger"> Password should be at least 8 characters</div>
+                      </div>
+                  
+                      <div *ngIf="password1.errors?.['passwordComplexity']">
+                        <div *ngIf="password1.touched && password1.invalid" class="alert alert-danger">
+                          Password must have at least one number, one uppercase letter, and one special character
                         </div>
                       </div>
                     </div>
-  
-                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" class="btn btn-primary btn-lg" [disabled]="signupForm.invalid">Register</button>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <fa-icon [icon]="faKey" class="fa-lg me-3 fa-fw fas " ></fa-icon>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example5c" class="form-control" formControlName="password2"/>
+                      <label class="form-label" for="form3Example5c">Confirm Password</label>
+                  
+                      <div *ngIf="password2.errors?.['required']">
+                        <div *ngIf="password2.touched && password2.invalid" class="alert alert-danger"> Confirm Password is required</div>
+                      </div>
+                  
+                      <div *ngIf="signupForm.hasError('passwordMismatch') && password2.touched">
+                        <div class="alert alert-danger"> Passwords do not match</div>
+                      </div>
+                  
+                      <div *ngIf="password2.errors?.['minlength']">
+                        <div *ngIf="password2.touched && password2.invalid" class="alert alert-danger"> Password should be at least 11 characters</div>
+                      </div>
                     </div>
-  
-                  </form>
-  
-                </div>
-                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-  
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                    class="img-fluid" alt="Sample image">
-  
-                </div>
+                  </div>
+
+
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="signupForm.invalid">Register</button>
+                  </div>
+
+                </form>
+
+                <div class="card-footer text-right">
+                  <small>Ohh I have an account <a routerLink="../login">Back to Login</a></small>
+              </div>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+  
+</section>
 
-  <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

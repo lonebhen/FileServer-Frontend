@@ -6,16 +6,22 @@ import { Pipe, PipeTransform, Injectable } from "@angular/core";
 })
 @Injectable()
 export class CustomFilterPipe implements PipeTransform {
-
-  transform(items: any, term: string, excludes: any = []): any {
+  transform(items: any, term: string, excludes: any[] = []): any {
     if (!term || !items) return items;
-    return CustomFilterPipe.filter(items, term, excludes);
+    const filteredItems = CustomFilterPipe.filter(items, term, excludes);
+    
+    // Check if there are any filtered items, if not, return "File not found" message or a specific object.
+    if (filteredItems.length === 0) {
+      return [{ message: "File not found" }];
+    }
+
+    return filteredItems;
   }
 
   static filter(
     items: Array<{ [key: string]: any }>,
     term: string,
-    excludes: any
+    excludes: any[]
   ): Array<{ [key: string]: any }> {
     const toCompare = term.toLowerCase();
 

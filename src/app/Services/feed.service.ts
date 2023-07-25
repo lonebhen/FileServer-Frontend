@@ -11,6 +11,8 @@ export class FeedService {
 
   private api_url: string = "https://file-server-ben.onrender.com/server"; 
 
+  // private api_url: string = "http://localhost:8000/server"
+
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
 

@@ -25,6 +25,8 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { FileActivityService } from './Services/file-activity.service';
+import { WelcomeComponent } from './Components/welcome/welcome.component';
+import { PasswordResetComponent } from './Components/password-reset/password-reset.component';
 // import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer/public_api';
 
 
@@ -38,6 +40,8 @@ import { FileActivityService } from './Services/file-activity.service';
     ForgotPasswordComponent,
     NotFoundComponent,
     SignUpComponent,
+    WelcomeComponent,
+    PasswordResetComponent,
     
   ],
   imports: [
